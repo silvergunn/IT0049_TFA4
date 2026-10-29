@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2026 at 04:04 PM
+-- Generation Time: Oct 29, 2026 at 03:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pos_tfa3`
+-- Database: `pos_tfa4`
 --
 
 -- --------------------------------------------------------
@@ -50,12 +50,36 @@ INSERT INTO `customers` (`id`, `full_name`, `email`, `phone`, `created_at`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `version` varchar(255) NOT NULL,
+  `class` varchar(255) NOT NULL,
+  `group` varchar(255) NOT NULL,
+  `namespace` varchar(255) NOT NULL,
+  `time` int(11) NOT NULL,
+  `batch` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
+(1, '2026-10-29-134246', 'App\\Database\\Migrations\\AddPasswordToUsers', 'default', 'App', 1793281428, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `full_name` varchar(100) NOT NULL,
   `role` varchar(30) NOT NULL,
   `created_at` datetime NOT NULL,
@@ -66,13 +90,13 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `full_name`, `role`, `created_at`, `avatar`) VALUES
-(1, 'admin01', 'Enzo Gonzales', 'Administrator', '2026-09-17 21:41:32', NULL),
-(2, 'cashier01', 'Jennie Kim', 'Cashier', '2026-09-17 21:41:32', NULL),
-(3, 'cashier02', 'Lisa Manoban', 'Cashier', '2026-09-17 21:41:32', NULL),
-(4, 'manager01', 'Rose Batumbakal', 'Manager', '2026-09-17 21:41:32', NULL),
-(5, 'staff01', 'Jisoo Kim', 'Staff', '2026-09-17 21:41:32', '1791639647_e2648bf72e645fba2c46.jpg'),
-(6, 'nthn.mgl', 'Nathan Gonzales', 'Manager', '0000-00-00 00:00:00', '1791639393_3bf26fbeb96f7c0c33c2.jpg');
+INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `role`, `created_at`, `avatar`) VALUES
+(1, 'admin01', '$2y$10$WPh1uKFFAC43Qp7jQBEiXe25ZF8hxjEcnw1aQ0UcE9VChGAL7ivue', 'Enzo Gonzales', 'Administrator', '2026-09-17 21:41:32', NULL),
+(2, 'cashier01', '$2y$10$yhzxBdcFH68R95gSu5r9Qe/sxNcWaj3VPabo/ZE3iMPeyjx4JIT.S', 'Jennie Kim', 'Cashier', '2026-09-17 21:41:32', NULL),
+(3, 'cashier02', '$2y$10$fOsXrPuKc8bxXUYtrEcs/uaNMhdAQ3WtvRrX2QxO2QCZAVjV6Yrh.', 'Lisa Manoban', 'Cashier', '2026-09-17 21:41:32', NULL),
+(4, 'manager01', '$2y$10$ad4MZUt/yaXDj2n5kOmF9eMRAktKQTGz.631sWPGTtX6MqNsHs4QW', 'Rose Batumbakal', 'Manager', '2026-09-17 21:41:32', NULL),
+(5, 'staff01', '$2y$10$lAjNSBHv5ugB.2X3HAiRp.zpB37DM5x5on6/EmeRSSivG5U9Gdt6y', 'Jisoo Kim', 'Staff', '2026-09-17 21:41:32', '1791639647_e2648bf72e645fba2c46.jpg'),
+(6, 'nthn.mgl', '$2y$10$YVHW5AsX3yYZjm8p5mkGBeYCbm8W1jAh4tJpDHI6zXxwDDV6xblpm', 'Nathan Gonzales', 'Manager', '0000-00-00 00:00:00', '1791639393_3bf26fbeb96f7c0c33c2.jpg');
 
 --
 -- Indexes for dumped tables
@@ -82,6 +106,12 @@ INSERT INTO `users` (`id`, `username`, `full_name`, `role`, `created_at`, `avata
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -100,6 +130,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `customers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
